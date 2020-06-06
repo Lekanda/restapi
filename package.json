@@ -1,0 +1,27 @@
+{
+  "name": "restapisnode",
+  "version": "0.0.0",
+  "description": "Crear una Rest Api",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lekanda/restapi.git"
+  },
+  "keywords": [
+    "Rest",
+    "Api"
+  ],
+  "author": "Andres Bernaola",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Lekanda/restapi/issues"
+  },
+  "homepage": "https://github.com/Lekanda/restapi#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.4"
+  }
+}
