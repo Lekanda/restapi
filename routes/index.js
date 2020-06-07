@@ -20,5 +20,8 @@ module.exports = function () {
     // Obtener un Cliente especifico x ID
     router.get('/clientes/:id', clienteController.mostrarCliente);
 
+    // Obtener un Cliente especifico x ID
+    router.put('/clientes/:id', clienteController.actualizarCliente);
+
     return router;
 };

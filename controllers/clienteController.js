@@ -42,3 +42,18 @@ exports.mostrarCliente = async (req,res,next) => {
             next();
         }
 }
+
+// Actualizar un Cliente por Id
+exports.actualizarCliente = async (req,res,next) => {
+    try {
+        const cliente = await Clientes.findOneAndUpdate({ _id : req.params.id }, 
+            req.body, {
+                new : true
+            });
+        res.json(cliente);
+    } catch (error) {
+        res.json({ mensaje:'No existe ese cliente'});
+        console.log(error);
+        next();
+    }
+}
