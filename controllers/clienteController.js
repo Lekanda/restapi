@@ -26,6 +26,19 @@ exports.mostrarClientes = async (req,res,next) => {
         res.json({mensaje:'Lista de Clientes', clientes});
     } catch (error) {
         console.log(error);
-        next
+        next();
     }
+}
+
+
+// Mostrar un Cliente por Id
+exports.mostrarCliente = async (req,res,next) => {
+        try {
+            const cliente = await Clientes.findById(req.params.id);
+            res.json(cliente);
+        } catch (error) {
+            res.json({ mensaje:'No existe ese cliente'});
+            console.log(error);
+            next();
+        }
 }
