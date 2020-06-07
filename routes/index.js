@@ -12,7 +12,10 @@ module.exports = function () {
         clienteController.nuevoCliente
     );
     
-
+    // Obtener todos los clientes
+    router.get('/clientes',
+        clienteController.mostrarClientes
+    );
 
     return router;
 };
