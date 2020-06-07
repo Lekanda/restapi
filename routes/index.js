@@ -1,17 +1,17 @@
 const express = require('express');
 router = express.Router();
+const clienteController = require('../controllers/clienteController');
 
 
 
 
 module.exports = function () {
-    router.get('/', (req,res) => {
-        res.send('inicio');
-    });
-    router.get('/nosotros',(req,res) => {
-        res.send('Nosotros');
-    })
-
+    
+    //
+    router.post('/clientes', 
+        clienteController.nuevoCliente
+    );
+    
 
 
     return router;
