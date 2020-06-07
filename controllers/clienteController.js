@@ -57,3 +57,16 @@ exports.actualizarCliente = async (req,res,next) => {
         next();
     }
 }
+
+
+// Eliminar una cliente de la DB
+exports.eliminarCliente = async(req,res,next) => {
+    try {
+        const cliente = await Clientes.findOneAndDelete({ _id:req.params.id });
+        res.json({ mensaje:'Cliente Eliminado'});
+    } catch (error) {
+        res.json({ mensaje:'No existe ese cliente'});
+        console.log(error);
+        next();
+    }
+}
