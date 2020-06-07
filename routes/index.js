@@ -8,15 +8,11 @@ const productosController = require('../controllers/productosController');
 
 module.exports = function () {
     
-    //
-    router.post('/clientes', 
-        clienteController.nuevoCliente
-    );
+//CLIENTES
+    router.post('/clientes', clienteController.nuevoCliente );
     
     // Obtener todos los clientes
-    router.get('/clientes',
-        clienteController.mostrarClientes
-    );
+    router.get('/clientes', clienteController.mostrarClientes );
 
     // Obtener un Cliente especifico x ID
     router.get('/clientes/:id', clienteController.mostrarCliente);
@@ -26,6 +22,29 @@ module.exports = function () {
 
     // Eliminar un Cliente de la DB
     router.delete('/clientes/:id', clienteController.eliminarCliente);
+
+
+// PRODUCTOS
+    // Nuevo Producto
+    router.post('/productos', productosController.nuevoProducto );
+    
+    // // Obtener todos los clientes
+    // router.get('/productos', productosController.mostrarProductos);
+
+    // // Obtener un Cliente especifico x ID
+    // router.get('/productos/:id', productosController.mostrarProducto);
+
+    // // Obtener un Cliente especifico x ID
+    // router.put('/productos/:id', productosController.actualizarProducto);
+
+    // // Eliminar un Cliente de la DB
+    // router.delete('/productos/:id', productosController.eliminarProducto);
+
+
+
+
+
+
 
     return router;
 };
