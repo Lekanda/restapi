@@ -1,13 +1,14 @@
 const Productos = require('../models/Productos');
 const multer = require('multer');
 const shortid = require('shortid');
+const fs = require('fs');
 
 const configuracionMulter = {
     limits : { fileSize : 100000 },
 
     storage: fileStorage = multer.diskStorage({// Donde se guarda
         destination: (req,file, cb) => {
-            console.log(__dirname+'../../uploads/');
+            // console.log(__dirname+'../../uploads/');
             
             cb(null, __dirname+'../../uploads/');
         },
@@ -44,8 +45,8 @@ exports.subirArchivo = (req,res,next) => {
 
 
 exports.nuevoProducto = async(req,res,next) => {
-    // console.log(req.body);
-    // console.log(req.file);
+    console.log(req.body);// Datos string y text
+    console.log(req.file);// archivo de imagen
     const producto = new Productos(req.body);
 
     try {
@@ -87,14 +88,25 @@ exports.mostrarProducto = async (req,res,next) => {
 }
 
 
-// actualiza un producto por ID
+// Actualiza un producto por ID
 exports.actualizarProducto = async(req,res,next) => {
     try {
+        let nuevoProducto = req.body;
+
+        // Verificar sí hay imagen nueva
+        if (req.file) {
+            nuevoProducto.imagen = req.file.filename;
+        }else{
+            let productoAnterior = await Productos.findById(req.params.id);
+            nuevoProducto.imagen = productoAnterior.imagen;
+        }
+
         const producto = await Productos.findOneAndUpdate({ _id : req.params.id }, 
-            req.body, {
-                new : true
+            nuevoProducto, {
+                new : true// trae el modificado
             });
         res.json(producto);
+
     } catch (error) {
         res.json({ mensaje:'No existe ese producto'});
         console.log(error);
@@ -103,12 +115,26 @@ exports.actualizarProducto = async(req,res,next) => {
 }
 
 
-// Elimina el producto x ID
+
+// // Elimina el producto x ID
 exports.eliminarProducto = async(req,res,next) => {
     try {
         const producto = await Productos.findOneAndDelete({ _id:req.params.id });
+        // console.log(producto.imagen);
+        // console.log(__dirname + `/../uploads/${producto.imagen}`);
+        if(producto.imagen){
+            const imagenAnterioPath = __dirname + `/../uploads/${producto.imagen}`;
+            // Eliminar archivo con filesystem
+            fs.unlink( imagenAnterioPath, (error) => {
+                if(error) {
+                    console.log(error);
+                }
+                return;
+            });
+        }
         res.json({ producto, mensaje:'Producto Eliminado'});
-    } catch (error) {
+
+    }catch(error){
         res.json({ mensaje:'No existe ese Producto'});
         console.log(error);
         next();
