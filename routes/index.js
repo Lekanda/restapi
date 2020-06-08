@@ -2,13 +2,14 @@ const express = require('express');
 router = express.Router();
 const clienteController = require('../controllers/clienteController');
 const productosController = require('../controllers/productosController');
+const pedidosController = require('../controllers/pedidosController');
 
 
 
 
 module.exports = function () {
     
-//CLIENTES
+//*********************CLIENTES*********************************
     router.post('/clientes', clienteController.nuevoCliente );
     
     // Obtener todos los clientes
@@ -24,7 +25,7 @@ module.exports = function () {
     router.delete('/clientes/:id', clienteController.eliminarCliente);
 
 
-// PRODUCTOS
+//***********************PRODUCTOS*****************************
     // Nuevo Producto
     router.post('/productos', 
         productosController.subirArchivo,
@@ -47,6 +48,11 @@ module.exports = function () {
 
 
 
+    
+//************************PEDIDOS***************************
+
+    // Nuevo Pedido
+    router.post('/pedidos', pedidosController.nuevoPedido);
 
 
 
