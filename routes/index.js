@@ -33,11 +33,11 @@ module.exports = function () {
     // Obtener todos los Productos
     router.get('/productos', productosController.mostrarProductos);
 
-    // // Obtener un Cliente especifico x ID
-    // router.get('/productos/:id', productosController.mostrarProducto);
+    // Obtener un Producto especifico x ID
+    router.get('/productos/:id', productosController.mostrarProducto);
 
-    // // Obtener un Cliente especifico x ID
-    // router.put('/productos/:id', productosController.actualizarProducto);
+    // Actualizar un producto especifico x ID
+    router.put('/productos/:id', productosController.actualizarProducto);
 
     // // Eliminar un Cliente de la DB
     // router.delete('/productos/:id', productosController.eliminarProducto);

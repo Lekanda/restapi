@@ -74,4 +74,30 @@ exports.mostrarProductos = async (req,res,next) => {
 }
 
 
-// Muestra el producto x 
+// Muestra el producto x ID
+exports.mostrarProducto = async (req,res,next) => {
+    try {
+        const producto = await Productos.findById({_id:req.params.id});
+        res.json(producto);
+    } catch (error) {
+        console.log(error);
+        res.json({ mensaje:'No existe el producto' });
+        next();
+    }
+}
+
+
+// actualiza un producto por ID
+exports.actualizarProducto = async(req,res,next) => {
+    try {
+        const producto = await Productos.findOneAndUpdate({ _id : req.params.id }, 
+            req.body, {
+                new : true
+            });
+        res.json(producto);
+    } catch (error) {
+        res.json({ mensaje:'No existe ese producto'});
+        console.log(error);
+        next();
+    }
+}
