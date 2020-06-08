@@ -72,3 +72,6 @@ exports.mostrarProductos = async (req,res,next) => {
         next();
     }
 }
+
+
+// Muestra el producto x 
