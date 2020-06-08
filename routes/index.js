@@ -29,9 +29,9 @@ module.exports = function () {
     router.post('/productos', 
         productosController.subirArchivo,
         productosController.nuevoProducto );
-    
-    // // Obtener todos los clientes
-    // router.get('/productos', productosController.mostrarProductos);
+    // 
+    // Obtener todos los Productos
+    router.get('/productos', productosController.mostrarProductos);
 
     // // Obtener un Cliente especifico x ID
     // router.get('/productos/:id', productosController.mostrarProducto);

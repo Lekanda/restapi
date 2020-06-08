@@ -44,8 +44,8 @@ exports.subirArchivo = (req,res,next) => {
 
 
 exports.nuevoProducto = async(req,res,next) => {
-    console.log(req.body);
-    console.log(req.file);
+    // console.log(req.body);
+    // console.log(req.file);
     const producto = new Productos(req.body);
 
     try {
@@ -57,6 +57,18 @@ exports.nuevoProducto = async(req,res,next) => {
     } catch (error) {
         console.log(error);
         res.json({ mensaje:'No se creo el producto' });
+        next();
+    }
+}
+
+
+// Muestra todos los productos
+exports.mostrarProductos = async (req,res,next) => {
+    try {
+        const productos = await Productos.find({});
+        res.json({mensaje:'Lista de Productos', productos});
+    } catch (error) {
+        console.log(error);
         next();
     }
 }
