@@ -101,3 +101,16 @@ exports.actualizarProducto = async(req,res,next) => {
         next();
     }
 }
+
+
+// Elimina el producto x ID
+exports.eliminarProducto = async(req,res,next) => {
+    try {
+        const producto = await Productos.findOneAndDelete({ _id:req.params.id });
+        res.json({ producto, mensaje:'Producto Eliminado'});
+    } catch (error) {
+        res.json({ mensaje:'No existe ese Producto'});
+        console.log(error);
+        next();
+    }
+}

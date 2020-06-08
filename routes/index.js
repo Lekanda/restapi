@@ -37,10 +37,13 @@ module.exports = function () {
     router.get('/productos/:id', productosController.mostrarProducto);
 
     // Actualizar un producto especifico x ID
-    router.put('/productos/:id', productosController.actualizarProducto);
+    router.put('/productos/:id', 
+        productosController.subirArchivo,
+        productosController.actualizarProducto
+    );
 
-    // // Eliminar un Cliente de la DB
-    // router.delete('/productos/:id', productosController.eliminarProducto);
+    // Eliminar un Cliente de la DB
+    router.delete('/productos/:id', productosController.eliminarProducto);
 
 
 
