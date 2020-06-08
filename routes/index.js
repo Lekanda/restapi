@@ -25,6 +25,7 @@ module.exports = function () {
     router.delete('/clientes/:id', clienteController.eliminarCliente);
 
 
+
 //***********************PRODUCTOS*****************************
     // Nuevo Producto
     router.post('/productos', 
@@ -40,12 +41,10 @@ module.exports = function () {
     // Actualizar un producto especifico x ID
     router.put('/productos/:id', 
         productosController.subirArchivo,
-        productosController.actualizarProducto
-    );
+        productosController.actualizarProducto);
 
     // Eliminar un Cliente de la DB
     router.delete('/productos/:id', productosController.eliminarProducto);
-
 
 
     
@@ -54,7 +53,17 @@ module.exports = function () {
     // Nuevo Pedido
     router.post('/pedidos', pedidosController.nuevoPedido);
 
+    // Mostrar Pedidos
+    router.get('/pedidos', pedidosController.mostrarPedidos);
 
+    // Mostrar pedido por ID
+    router.get('/pedidos/:id', pedidosController.mostrarPedido);
+
+    // Actualizar pedido x ID
+    router.put('/pedidos/:id', pedidosController.actualizarPedido);
+
+    // Eliminar x ID
+    router.delete('/pedidos/:id', pedidosController.eliminarPedido);
 
 
     return router;
