@@ -1,0 +1,11 @@
+
+
+
+exports.registrarUsuario = () => {
+
+}
+
+
+exports.autenticarUsuario = () => {
+
+}
