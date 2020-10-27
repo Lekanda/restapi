@@ -10,10 +10,11 @@ exports.nuevoCliente = async(req,res,next) => {
     try {
         // Almacenar el regitro
         await cliente.save();
-        res.json({ mensaje: 'Se agrego a la DB' });
+        res.json({ mensaje: 'Se agrego un cliente a la DB' });
     } catch (error) {
         // Sí hay un error
         console.log(error);
+        res.send(error);
         next();
     }
 }
@@ -23,7 +24,7 @@ exports.mostrarClientes = async (req,res,next) => {
 
     try {
         const clientes = await Clientes.find({});
-        res.json({mensaje:'Lista de Clientes', clientes});
+        res.json({clientes});
     } catch (error) {
         console.log(error);
         next();
@@ -53,7 +54,7 @@ exports.actualizarCliente = async (req,res,next) => {
         res.json(cliente);
     } catch (error) {
         res.json({ mensaje:'No existe ese cliente'});
-        console.log(error);
+        res.send(error);
         next();
     }
 }
