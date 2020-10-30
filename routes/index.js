@@ -6,6 +6,9 @@ const pedidosController = require('../controllers/pedidosController');
 const usuariosController = require('../controllers/usuariosController');
 
 
+// Middleware para proteger las rutas
+const auth = require('../middleware/auth');
+
 
 
 module.exports = function () {
@@ -14,7 +17,10 @@ module.exports = function () {
     router.post('/clientes', clienteController.nuevoCliente );
     
     // Obtener todos los clientes
-    router.get('/clientes', clienteController.mostrarClientes );
+    router.get('/clientes', 
+        auth,
+        clienteController.mostrarClientes
+    );
 
     // Obtener un Cliente especifico x ID
     router.get('/clientes/:id', clienteController.mostrarCliente);
@@ -71,12 +77,12 @@ module.exports = function () {
 /************************************************* */
 //       USUARIOS
 
-router.post('/crear-cuenta',
+    router.post('/crear-cuenta',
     usuariosController.registrarUsuario
-);
-router.post('/iniciar-sesion',
+    );
+    router.post('/iniciar-sesion',
     usuariosController.autenticarUsuario
-);
+    );
 
 
 
