@@ -4,7 +4,7 @@ module.exports = (req,res,next) => {
 
     // Autorizacion por el header. En Axios es obligatorio mandar uun request con esa autorizacion.
     const authHeader = req.get('Authorization') ;
-    console.log(authHeader);
+    // console.log(authHeader);
 
 
     if(!authHeader) {

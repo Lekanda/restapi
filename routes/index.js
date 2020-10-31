@@ -14,7 +14,10 @@ const auth = require('../middleware/auth');
 module.exports = function () {
     
 //*********************CLIENTES*********************************
-    router.post('/clientes', clienteController.nuevoCliente );
+    router.post('/clientes', 
+        auth,
+        clienteController.nuevoCliente 
+    );
     
     // Obtener todos los clientes
     router.get('/clientes', 
@@ -23,65 +26,104 @@ module.exports = function () {
     );
 
     // Obtener un Cliente especifico x ID
-    router.get('/clientes/:id', clienteController.mostrarCliente);
+    router.get('/clientes/:id',
+        auth, 
+        clienteController.mostrarCliente
+    );
 
-    // Obtener un Cliente especifico x ID
-    router.put('/clientes/:id', clienteController.actualizarCliente);
+    // Actualizar un Cliente especifico x ID
+    router.put('/clientes/:id',
+        auth, 
+        clienteController.actualizarCliente
+    );
 
     // Eliminar un Cliente de la DB
-    router.delete('/clientes/:id', clienteController.eliminarCliente);
+    router.delete('/clientes/:id',
+        auth, 
+        clienteController.eliminarCliente
+    );
 
 
 
 //***********************PRODUCTOS*****************************
     // Nuevo Producto
     router.post('/productos', 
+        auth,
         productosController.subirArchivo,
         productosController.nuevoProducto );
     // 
     // Obtener todos los Productos
-    router.get('/productos', productosController.mostrarProductos);
+    router.get('/productos',
+        auth, 
+        productosController.mostrarProductos
+    );
 
     // Obtener un Producto especifico x ID
-    router.get('/productos/:id', productosController.mostrarProducto);
+    router.get('/productos/:id',
+        auth,
+        productosController.mostrarProducto
+    );
 
     // Actualizar un producto especifico x ID
-    router.put('/productos/:id', 
+    router.put('/productos/:id',
+        auth, 
         productosController.subirArchivo,
         productosController.actualizarProducto);
 
     // Eliminar un Producto de la DB
-    router.delete('/productos/:id', productosController.eliminarProducto);
+    router.delete('/productos/:id', 
+        auth,
+        productosController.eliminarProducto
+    );
 
     // Busqueda de productos
-    router.post('/productos/busqueda/:query', productosController.buscarProducto);
+    router.post('/productos/busqueda/:query',
+        auth,
+        productosController.buscarProducto
+    );
 
 
     
 //************************PEDIDOS***************************
 
     // Nuevo Pedido
-    router.post('/pedidos/nuevo/:idUsuario', pedidosController.nuevoPedido);
+    router.post('/pedidos/nuevo/:idUsuario', 
+        auth,
+        pedidosController.nuevoPedido
+    );
     
     // Mostrar Pedidos
-    router.get('/pedidos', pedidosController.mostrarPedidos);
+    router.get('/pedidos', 
+        auth,
+        pedidosController.mostrarPedidos
+    );
     
     // Mostrar pedido por ID
-    router.get('/pedidos/:id', pedidosController.mostrarPedido);
+    router.get('/pedidos/:id',
+        auth, 
+        pedidosController.mostrarPedido
+    );
     
     // Actualizar pedido x ID
-    router.put('/pedidos/:id', pedidosController.actualizarPedido);
+    router.put('/pedidos/:id',
+        auth, 
+        pedidosController.actualizarPedido
+    );
     
     // Eliminar x ID
-    router.delete('/pedidos/:id', pedidosController.eliminarPedido);
+    router.delete('/pedidos/:id',
+        auth, 
+        pedidosController.eliminarPedido
+    );
 /************************************************* */
 //       USUARIOS
 
     router.post('/crear-cuenta',
-    usuariosController.registrarUsuario
+        auth,
+        usuariosController.registrarUsuario
     );
     router.post('/iniciar-sesion',
-    usuariosController.autenticarUsuario
+        usuariosController.autenticarUsuario
     );
 
 
