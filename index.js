@@ -53,5 +53,12 @@ app.use('/', routes());
 // Carpeta publica
 app.use( express.static( 'uploads' ) );
 
+
+const host = process.env.HOST || '0.0.0.0';
+const port = process.env.PORT || 2000;
+
+
 // Puerto
-app.listen(2000);
+app.listen(port, host, () => {
+    console.log('El servidor esta funcionando');
+});
