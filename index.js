@@ -3,6 +3,7 @@ const routes = require('./routes');
 const mongoose= require('mongoose');
 const bodyParser = require('body-parser');
 const path = require('path');
+require('dotenv').config({ path: 'variables.env'});
 
 // CORS permite que un cliente se conecte a otro servidor para el intercambio de de recursos
 const cors = require('cors');
@@ -12,7 +13,7 @@ const cors = require('cors');
 
 // Conectar Mongo
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/restapis', {
+mongoose.connect(process.env.DB_URL, {
     useNewUrlParser:true,
     useUnifiedTopology: true,
     useFindAndModify: false,
@@ -27,7 +28,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));// Para leer texto plano
 
 // Definir un dominio(s) para recibir las peticiones.Est se conoce tener el dominio en una lista blanca
-const whitelist = ['http://localhost:3000', 'http://192.168.2.3:3000'];
+const whitelist = [process.env.FRONTEND_URL, process.env.FRONTEND_URL2];
 const corsOptions = {
     origin: (origin, callback) => {
         // console.log(origin);
