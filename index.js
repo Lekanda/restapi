@@ -26,9 +26,25 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));// Para leer texto plano
 
+// Definir un dominio(s) para recibir las peticiones.Est se conoce tener el dominio en una lista blanca
+const whitelist = ['http://localhost:3000', 'http://192.168.2.3:3000'];
+const corsOptions = {
+    origin: (origin, callback) => {
+        // console.log(origin);
+        // Revisar si la peticionviene de un servidor que esta en la lista blanca(whitelist)
+        const existe = whitelist.some( dominio => dominio === origin );
+        if(existe) {
+            callback(null, true);
+        } else {
+            callback(new Error('No permitido por CORS'));
+        }
+    }
+}
+
+
 
 // Habilitar CORS
-app.use(cors());
+app.use(cors(corsOptions));
 
 // Rutas de la App
 app.use('/', routes());
