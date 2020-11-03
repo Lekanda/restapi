@@ -32,7 +32,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));// Para leer texto plano
 
 // Definir un dominio(s) para recibir las peticiones.Est se conoce tener el dominio en una lista blanca
-const whitelist = [process.env.FRONTEND_URL];
+const whitelist = [process.env.FRONTEND_URL, process.env.FRONTEND_URL2];
 const corsOptions = {
     origin: (origin, callback) => {
         // console.log(origin);
