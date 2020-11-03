@@ -23,12 +23,16 @@ mongoose.connect(process.env.DB_URL, {
 // Crear el servidor
 const app = express();
 
+// Carpeta publica
+app.use( express.static( 'uploads' ) );
+
+
 // Habilitar body-parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));// Para leer texto plano
 
 // Definir un dominio(s) para recibir las peticiones.Est se conoce tener el dominio en una lista blanca
-const whitelist = [process.env.FRONTEND_URL, process.env.FRONTEND_URL2];
+const whitelist = [process.env.FRONTEND_URL];
 const corsOptions = {
     origin: (origin, callback) => {
         // console.log(origin);
@@ -50,8 +54,6 @@ app.use(cors(corsOptions));
 // Rutas de la App
 app.use('/', routes());
 
-// Carpeta publica
-app.use( express.static( 'uploads' ) );
 
 
 const host = process.env.HOST || '0.0.0.0';
